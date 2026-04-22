@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -57,3 +58,12 @@ public class Hello
 		}
 	}
 }
+=======
+public class Hello
+{
+	public static void main(String [] args)
+	{
+		System.out.println("Xin chao ");
+	}
+}
+>>>>>>> 54f777ab9aeb0fde69dd78aefa4272573c4ccfcc
