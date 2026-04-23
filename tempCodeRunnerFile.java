@@ -1,0 +1,1 @@
+// viết panlundrome nhận 1 tham số string có return true nếu tham số là chuỗi panlyndrome  l
