@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -58,7 +58,6 @@ public class Hello
 		}
 	}
 }
-=======
 public class Hello
 {
 	public static void main(String [] args)
