@@ -14,7 +14,6 @@ public class Main {
         {
              System.out.println(" San pham nhan vien Thu > nhan vien Bao");
         }
-
     }
     public static boolean Lonhon(nhanvien a ,nhanvien b)
     {
