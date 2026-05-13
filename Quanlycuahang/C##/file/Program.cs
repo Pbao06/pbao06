@@ -1,0 +1,62 @@
+﻿// See https://aka.ms/new-console-template for more information
+using System.IO;
+namespace bai_file
+{
+    internal class Program // internal cho phép dùng trong project 
+    {
+        static void Main(string [] args)
+        {
+            //1.StreamWriter ghi file van ban 
+            FileStream fs=new FileStream("data1.txt",FileMode.Create,FileAccess.ReadWrite); // fileaccess vừa đọc vừa ghi 
+            StreamWriter swrite= new StreamWriter(fs);
+            swrite.Write(" chao cac ban ");
+            swrite.Flush();// đưa vào file 
+            fs.Close();// đóng file
+
+            // 2 streamreader: đọc file văn bản 
+            fs=new FileStream("data1.txt",FileMode.Open,FileAccess.Read);
+            StreamReader sread=new StreamReader(fs);
+            string str=sread.ReadToEnd(); // đọc từ đàu tới cuối
+            Console.WriteLine(str);
+            fs.Close();// đóng file 
+
+            // 3 binaryWriter/binaryReader
+
+            // GHI
+        FileStream fs2 = new FileStream("data2.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+        BinaryWriter bw = new BinaryWriter(fs2);
+
+        bw.Write(123);
+
+        bw.Close();
+        fs2.Close();
+
+        // ĐỌC
+        fs2 = new FileStream("data2.txt", FileMode.Open, FileAccess.Read);
+        BinaryReader br = new BinaryReader(fs2);
+
+        int i = br.ReadInt32();
+        Console.WriteLine(i);
+
+        br.Close();
+        fs2.Close();
+
+        // 4 using ( để khỏi dùng close )
+        using (FileStream fs3=new FileStream("data3.txt",FileMode.Create,FileAccess.Write))
+            {
+                StreamWriter sw3= new StreamWriter(fs3);
+                sw3.WriteLine(" helo anh em ");
+                sw3.Flush();
+            }
+        using (FileStream fs3=new FileStream("data3.txt",FileMode.Open,FileAccess.Read))
+            {
+                StreamReader sr3= new StreamReader(fs3);
+                string s=sr3.ReadLine();
+                Console.WriteLine(s);
+
+                
+            }
+        Console.ReadKey();
+        }
+    }
+}

@@ -1,0 +1,140 @@
+﻿// See https://aka.ms/new-console-template for more information
+using System;
+using System.Linq.Expressions;
+namespace console_1
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            chinh.run();
+        }
+        
+    }
+    public class chinh
+    {
+        static int lenh=0;
+        public static void menu()
+        {
+            Console.WriteLine("\n PRESS 0: TO OUT");
+            Console.WriteLine("\n PRESS 1: ENTER 1 FACTIONAL ");
+            Console.WriteLine("\n PRESS 2: OUTPUT 1 FRACTIONAL");
+            Console.WriteLine("\n PRESS 3: OVERLOAD FRACTIONAL");
+            Console.WriteLine("\n ENTER PROMPT:  ");
+        }
+        static Phanso ps1,ps2;
+        
+        public static void run()
+        {
+           while(true)
+            {
+                 menu();
+                lenh=int.Parse(Console.ReadLine());
+                switch(lenh)
+                {
+                case 0: Console.WriteLine(" THOAT ");Environment.Exit(0);break;
+                case 1:  Console.WriteLine("Nhap phan so thu 1:");
+                        ps1 = Phanso.Nhap();
+                        Console.WriteLine("Nhap phan so thu 2:");
+                        ps2 = Phanso.Nhap(); break;
+                case 2: Phanso.xuat(ps1);
+                        Console.Write(" , ");
+                        Phanso.xuat(ps2);
+                        Console.WriteLine(); break;
+                case 3: Phanso.tinhtoan(ps1,ps2); break;
+                default:  Console.WriteLine(" CHI NHAP TRONG 0 1 2 3 !!!"); break;
+                }
+            }
+        }
+        
+    }
+    public class Phanso
+    {
+        public int tu;
+        public int mau;
+        static List<Phanso> dsphanso=new List<Phanso>();
+        public static int  index=-1;
+       public Phanso()
+        {
+            tu=0;
+            mau=1;
+        }
+        
+        public static Phanso Nhap()
+        {
+            Phanso ps=new Phanso(); 
+            Console.Write(" Nhap tu : ");
+            ps.tu=int.Parse(Console.ReadLine());
+            Console.Write(" Nhap mau: ");
+            ps.mau=int.Parse(Console.ReadLine());
+            dsphanso.Add(ps);
+            index++;// was added list
+            return ps;
+        }
+        public static void xuat(Phanso ps)
+        {
+            rutgonps(ps);
+            if(ps.mau==1)
+            {
+                Console.Write($" {ps.tu} ");
+            }
+            else
+             Console.Write($" {ps.tu}/{ps.mau}");
+        }
+        public static Phanso operator+(Phanso a,Phanso b)
+        {
+            Phanso kq=new Phanso();
+            kq.tu=a.tu*b.mau+b.tu*a.mau;
+            kq.mau=a.mau*b.mau;
+            return kq;
+        }
+        public static void tinhtoan(Phanso a,Phanso b)
+        {
+            Phanso c= new Phanso();
+            c=a+b;
+            rutgonps(c);
+            Console.Write($" {a.tu}/{a.mau} + {b.tu}/{b.mau}= {c.tu}/{c.mau}");
+        }
+        public static Phanso operator-(Phanso a,Phanso b)
+        {
+            Phanso kq=new Phanso();
+            kq.tu=a.tu*b.mau-b.tu*a.mau;
+            kq.mau=a.mau*b.mau;
+            return kq;
+        }
+        public static Phanso operator*(Phanso a,Phanso b)
+        {
+            Phanso kq=new Phanso();
+            kq.tu=a.tu*b.tu;
+            kq.mau=a.mau*b.mau;
+            return kq;
+        }
+        
+        // rút gọn phân số 
+
+        // 
+        public static int Uocchung(int a ,int b)
+        {
+            while(a!=b)
+            {
+                if(a>b) a-=b;
+                else b-=a;
+            }
+            return a;
+        }
+        public static void rutgonps(Phanso ps)
+        {
+            int ucln=Uocchung(Math.Abs(ps.tu),Math.Abs(ps.mau));
+            ps.tu/=ucln;
+            ps.mau/=ucln;
+            if(ps.mau<0)
+            {
+                ps.tu*=(-1);
+                ps.mau*=(-1);
+            }
+        }
+    }
+}
+
+
+

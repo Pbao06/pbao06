@@ -1,0 +1,18 @@
+--CURSOR 
+DECLARE @ma varchar(6),@ten varchar(50) , @ngaysinh date 
+DECLARE CURSORSV CURSOR FOR SELECT Massv,Tensv,Ngaysinh FROM Sinhvien
+OPEN CURSORSV -- MỞ 
+FETCH NEXT FROM CURSORSV INTO @ma,@ten,@ngaysinh
+WHILE @@FETCH_STATUS=0
+BEGIN 
+    print N'*****************************'
+    PRINT N'        THẺ SINH VIÊN'
+    PRINT N'MÃ SỐ '+@ma
+    print N'HỌ TÊN:' + @ten
+    print N'ngày sinhL '+ format (@ngaysinh,'d','en-gb')
+    print N'*****************************'
+    print ''
+    --đọc dòng kế tiếp 
+    FETCH NEXT FROM CURSORSV INTO @ma,@ten,@ngaysinh
+    END CLOSE CURSORSV
+    DEALLOCATE CURSORSV
